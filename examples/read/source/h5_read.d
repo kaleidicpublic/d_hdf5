@@ -92,7 +92,7 @@ int main(string[] args)
     offset[1] = 2;
     count[0]  = NX_SUB;
     count[1]  = NY_SUB;
-    H5S.select_hyperslab(dataspace, H5SSeloper.Set, offset, [], count, []);
+    H5S.select_hyperslab(dataspace, H5SSelectOperation.set, offset, [], count, []);
 
     // Define the memory dataspace.
     dimsm[0] = NX;
@@ -107,7 +107,7 @@ int main(string[] args)
     count_out[0]  = NX_SUB;
     count_out[1]  = NY_SUB;
     count_out[2]  = 1;
-    H5S.select_hyperslab(memspace, H5SSeloper.Set, offset_out, [], count_out, []);
+    H5S.select_hyperslab(memspace, H5SSelectOperation.set, offset_out, [], count_out, []);
 
     // Read data from hyperslab in the file into the hyperslab in memory and display.
     H5D.read(dataset, H5T_NATIVE_INT, memspace, dataspace, H5P_DEFAULT, cast(ubyte*)data_out);

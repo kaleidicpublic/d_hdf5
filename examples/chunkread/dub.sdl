@@ -1,5 +1,5 @@
-name "complexdatatype"
-description "\n\tThis example shows how to create a compound data type,\n\twrite an array which has the compound data type to the file,\n  \tand read back fields' subsets.\n"
+name "chunkread"
+description "\n\t\tThis example shows how to read data from a chunked dataset.\n\t  \tWe will read from the file created by h5_extend_write.d\n"
 homepage "https://github.com/Laeeth/d_hdf5"
 authors "Laeeth Isharc,HDF5 Group"
 license "Boost-1.0"
