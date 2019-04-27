@@ -1,0 +1,6 @@
+name "contents"
+description "view contents of hdf5 file"
+authors "Laeeth Isharc"
+copyright "Copyright © 2019, Laeeth Isharc"
+license "proprietary"
+dependency "d_hdf5" version="*"
