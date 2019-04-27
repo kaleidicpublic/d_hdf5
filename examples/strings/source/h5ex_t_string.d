@@ -25,7 +25,8 @@
 
 
 import hdf5.hdf5;
-import hdf5.bindings.api:H5open;
+import hdf5.head;
+//import hdf5.bindings.api:H5open;
 import std.file;
 import std.stdio;
 import std.exception;

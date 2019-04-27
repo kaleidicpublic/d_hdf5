@@ -1,5 +1,5 @@
-name "attribute"
-description "illustrates the usage of the H5A Interface functions: based on h5_attribute.c"
+name "read"
+description "illustrates the usage of the H5 read functions: based on h5_read.c"
 homepage "https://github.com/Laeeth/d_hdf5"
 authors "Laeeth Isharc,HDF5 Group"
 license "Boost-1.0"

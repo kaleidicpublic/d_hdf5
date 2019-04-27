@@ -23,6 +23,7 @@
 
 import std.stdio;
 import hdf5.hdf5;
+import hdf5.head;
 
 enum filename=        "subset.h5";
 enum DATASETNAME ="IntArray";
@@ -62,7 +63,7 @@ int main(string[] args)
     dims[1] = DIM1;
     dataspace_id = H5S.create_simple(dims);
 
-    dataset_id = H5D.create2(file_id, DATASETNAME, H5T_STD_I32BE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+    dataset_id = H5D.create2(file_id, DATASETNAME, H5T_STD_I32BE_g, dataspace_id, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
 
 
     foreach(j;0.. DIM0) {
@@ -116,7 +117,7 @@ int main(string[] args)
     memspace_id = H5S.create_simple(dimsm);
 
     dataspace_id = H5D.get_space (dataset_id);
-    H5S.select_hyperslab (dataspace_id, H5SSeloper.Set, offset, stride, count, block);
+    H5S.select_hyperslab (dataspace_id, H5SSelectOperation.set, offset, stride, count, block);
 
     /* Write a subset of data to the dataset, then read the 
        entire dataset back from the file.  */

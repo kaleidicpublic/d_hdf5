@@ -23,6 +23,7 @@
 
 
 import hdf5.hdf5;
+import hdf5.head;
 import std.string;
 import std.stdio;
 import std.conv:to;
@@ -284,7 +285,7 @@ void soft_link_example()
  */
 
 extern(C) hid_t UD_soft_traverse(const char *link_name, hid_t cur_group,
-    const void *udata, size_t udata_size, hid_t lapl_id)
+    const void *udata, ulong udata_size , hid_t lapl_id, long foo)
 {
     const char *target = cast(const char *) udata;
     hid_t ret_value;
@@ -312,9 +313,9 @@ extern(C) hid_t UD_soft_traverse(const char *link_name, hid_t cur_group,
  * To keep the example simple, these links don't have a query callback.
  * Generally, real link classes should always be query-able.
  */
-herr_t UD_hard_create(const char *link_name, hid_t loc_group, const void *udata, size_t udata_size, hid_t lcpl_id);
-herr_t UD_hard_delete(const char *link_name, hid_t loc_group, const void *udata, size_t udata_size);
-hid_t UD_hard_traverse(const char *link_name, hid_t cur_group, const void *udata, size_t udata_size, hid_t lapl_id);
+//herr_t UD_hard_create(const char *link_name, hid_t loc_group, const void *udata, size_t udata_size, hid_t lcpl_id);
+//herr_t UD_hard_delete(const char *link_name, hid_t loc_group, const void *udata, size_t udata_size);
+//hid_t UD_hard_traverse(const char *link_name, hid_t cur_group, const void *udata, size_t udata_size, hid_t lapl_id,long);
 
 void hard_link_example()
 {
@@ -480,7 +481,7 @@ done:
  * return its ID.
  */
 extern(C) hid_t UD_hard_traverse(const char *link_name, hid_t cur_group,
-    const void *udata, size_t udata_size, hid_t lapl_id)
+    const void *udata, size_t udata_size, hid_t lapl_id, long foo)
 {
     haddr_t       addr;
     hid_t         ret_value = -1;
@@ -620,7 +621,7 @@ void plist_link_example()
 /* UD_plist_traverse
  * Open a path passed in through the property list.
  */
- extern(C) hid_t UD_plist_traverse(const char *link_name, hid_t cur_group, const void *udata, size_t udata_size, hid_t lapl_id)
+ extern(C) hid_t UD_plist_traverse(const char *link_name, hid_t cur_group, const void *udata, size_t udata_size, hid_t lapl_id, long foo)
 {
     char *        path;
     hid_t         ret_value = -1;

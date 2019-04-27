@@ -1,4 +1,5 @@
 import hdf5.hdf5;
+import hdf5.head;
 //
 //import hdf5.hdf5;
 //
@@ -28,7 +29,7 @@ import std.array;
 	Not heavily tested, but it should work
 */
 
-alias hid_t = int;
+//alias hid_t = int;
 enum LENGTH =10LU;
 enum RANK          =1;
 enum CHUNKSIZE=260;
@@ -76,7 +77,7 @@ int main(string[] args)
 
 hid_t createDataType(T)(T datatype)
 {
-	auto tid=H5T.create(H5TClass.Compound,datatype.sizeof);
+	auto tid=H5T.create(H5TClass.H5T_COMPOUND,datatype.sizeof);
 	enum offsetof(alias type, string field) = mixin(type.stringof ~"."~field~".offsetof");
 
 	foreach(member; __traits(derivedMembers, T))
@@ -146,7 +147,7 @@ void dumpDataSpaceVector(T)(string filename,string datasetName, T[] data,bool ap
 			debug writefln("*set filespace");
 	    		offset[0] = dims_out[0];
 	    		auto dim2=[data.length];
-			H5S.select_hyperslab(filespace, H5SSeloper.Set, offset, dim2);
+			H5S.select_hyperslab(filespace, H5SSelectOperation.set, offset, dim2);
 			debug writefln("*selected hyperslab");
 			auto dataspace2 = H5S.create_simple(dim2);
 			debug writefln("*create simple dim2");

@@ -28,6 +28,7 @@
 import std.string;
 import std.stdio;
 import hdf5.hdf5;
+import hdf5.head;
 
 enum FILE            ="h5ex_d_unlimadd.h5";
 enum DATASET         ="DS1";
@@ -81,7 +82,7 @@ int main (string[] args)
     /*
      * Create the unlimited dataset.
      */
-    dset = H5D.create2(file, DATASET, H5T_STD_I32LE, space, 0,dcpl,0);
+    dset = H5D.create2(file, DATASET, H5T_STD_I32LE_g, space, 0,dcpl,0);
 
     /*
      * Write the data to the dataset.
@@ -180,7 +181,7 @@ int main (string[] args)
     start[1] = 0;
     count[0] = dims[0];
     count[1] = dims[1];
-    H5S.select_hyperslab (space, H5SSeloper.NotB, start[],  count[]);
+    H5S.select_hyperslab (space, cast(H5SSelectOperation) H5S_SELECT_NOTB, start[],  count[]);
 
     /*
      * Write the data to the selected portion of the dataset.

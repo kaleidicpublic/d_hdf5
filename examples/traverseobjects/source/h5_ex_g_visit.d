@@ -11,6 +11,7 @@
 
 
 import hdf5.hdf5;
+import hdf5.head;
 import std.stdio;
 import std.string;
 
@@ -25,13 +26,13 @@ int main(string[] args)
 
     // Begin iteration using H5Ovisit
     writefln ("Objects in the file:");
-    //H5O.visit (file, H5Index.Name, H5IterOrder.Native, &op_func, cast(void*)0);
-    H5Ovisit (file, H5Index.Name, H5IterOrder.Native, &op_func, cast(void*)0);
+    //H5O.visit (file, H5Index.name, H5IterOrder.native, &op_func, cast(void*)0);
+    H5Ovisit (file, H5Index.name, H5IterOrder.native, &op_func, cast(void*)0);
 
     // Repeat the same process using H5Lvisit
     writefln  ("\nLinks in the file:");
-    //H5L.visit(file, H5Index.Name, H5IterOrder.Native, &op_func_L, cast(void*)0);
-    H5Lvisit(file, H5Index.Name, H5IterOrder.Native, &op_func_L, cast(void*)0);
+    //H5L.visit(file, H5Index.name, H5IterOrder.native, &op_func_L, cast(void*)0);
+    H5Lvisit(file, H5Index.name, H5IterOrder.native, &op_func_L, cast(void*)0);
     writefln("About to close");
     // Close and release resources.
     //H5F.close (file);

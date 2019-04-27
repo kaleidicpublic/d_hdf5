@@ -36,6 +36,7 @@
 
 
 import hdf5.hdf5;
+import hdf5.head;
 import std.file;
 import std.stdio;
 import std.exception;
@@ -119,7 +120,7 @@ int main(string[] args)
     H5Dread(dataset, H5T_NATIVE_FLOAT, H5S_ALL, H5S_ALL, H5P_DEFAULT, cast(ubyte*)windchillC.ptr);
 
     /* Print the data from the read*/
-    printf("\nData with write transform, but no read transform: \n");
+    writef("\nData with write transform, but no read transform: \n");
     PRINT(windchillC);
 
 

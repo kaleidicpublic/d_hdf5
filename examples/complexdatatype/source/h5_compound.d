@@ -21,6 +21,7 @@
 */ 
 
 import hdf5.hdf5;
+import hdf5.head;
 import std.stdio;
 import std.exception;
 import std.string;
@@ -70,7 +71,7 @@ int main(string[] args)
     writefln("* Create the file");
     file = H5F.create(H5FILE_NAME, H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
     writefln("* Create the memory data type");
-    s1_tid = H5T.create (H5TClass.Compound, s1_t.sizeof);
+    s1_tid = H5T.create (H5TClass.H5T_COMPOUND, s1_t.sizeof);
     H5T.insert(s1_tid, "a_name", s1_t.a.offsetof, H5T_NATIVE_INT);
     H5T.insert(s1_tid, "c_name", s1_t.c.offsetof, H5T_NATIVE_DOUBLE);
     H5T.insert(s1_tid, "b_name", s1_t.b.offsetof, H5T_NATIVE_FLOAT);
@@ -89,7 +90,7 @@ int main(string[] args)
     dataset = H5D.open2(file, DATASETNAME, H5P_DEFAULT);
 
     writefln("* Create a data type for s2");
-    s2_tid = H5T.create(H5TClass.Compound, s2_t.sizeof);
+    s2_tid = H5T.create(H5TClass.H5T_COMPOUND, s2_t.sizeof);
     H5T.insert(s2_tid, "c_name", s2_t.c.offsetof, H5T_NATIVE_DOUBLE);
     H5T.insert(s2_tid, "a_name", s2_t.a.offsetof, H5T_NATIVE_INT);
 
@@ -110,7 +111,7 @@ int main(string[] args)
     writefln("");
 
     writefln("* Create a data type for s3");
-    s3_tid = H5T.create(H5TClass.Compound, float.sizeof);
+    s3_tid = H5T.create(H5TClass.H5T_COMPOUND, float.sizeof);
     H5T.insert(s3_tid, "b_name", 0, H5T_NATIVE_FLOAT);
     writefln("* Read field b from s1 dataset. Field in the file is found by its name");
     H5D.read(dataset, s3_tid, H5S_ALL, H5S_ALL, H5P_DEFAULT, cast(ubyte*)s3);

@@ -26,6 +26,7 @@
 
 
 import hdf5.hdf5;
+import hdf5.head;
 
 import std.stdio;
 import std.exception;

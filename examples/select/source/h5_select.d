@@ -27,6 +27,7 @@
 
 
 import hdf5.hdf5;
+import hdf5.head;
 import std.stdio;
 import std.exception;
 
@@ -115,7 +116,7 @@ int main(string[] args)
     stride[0] = 4; stride[1] = 3;
     count[0]  = 2; count[1]  = 4;
     block[0]  = 3; block[1]  = 2;
-    H5S.select_hyperslab(fid, H5SSeloper.Set, start, stride, count, block);
+    H5S.select_hyperslab(fid, H5SSelectOperation.set, start, stride, count, block);
 
     /*
      * Create dataspace for the first dataset.
@@ -131,7 +132,7 @@ int main(string[] args)
     stride[0] = 1;
     count[0]  = 48;
     block[0]  = 1;
-    H5S.select_hyperslab(mid1, H5SSeloper.Set, start, stride, count, block);
+    H5S.select_hyperslab(mid1, H5SSelectOperation.set, start, stride, count, block);
 
     /*
      * Write selection from the vector buffer to the dataset in the file.
@@ -230,7 +231,7 @@ int main(string[] args)
     block[0] = 1; block[1] = 1;
     stride[0] = 1; stride[1] = 1;
     count[0]  = 3; count[1]  = 4;
-    H5S.select_hyperslab(fid, H5SSeloper  .Set, start, stride, count, block);
+    H5S.select_hyperslab(fid, H5SSeloper  .Set, start.ptr, stride.ptr, count.ptr, block);
 
     /*
      * Add second selected hyperslab to the selection.

@@ -24,6 +24,7 @@
 
 
 import hdf5.hdf5;
+import hdf5.head;
 
 import std.file;
 import std.stdio;
@@ -114,14 +115,14 @@ int main(string[] args)
     H5D.close(dataset);
 
     writefln("* Use iterator to see the names of the objects in the root group");
-    H5L.iterate(file, H5Index.Name, H5IterOrder.Inc, &file_info);
+    H5L.iterate(file, H5Index.name, H5IterOrder.inc, &file_info);
 
     writefln("* Unlink  name \"Data\" and use iterator to see the names of the objects in the file root directory");
     H5L.h5delete(file, "Data", H5P_DEFAULT);
-    H5L.iterate(file, H5Index.Name, H5IterOrder.Inc, &file_info);
+    H5L.iterate(file, H5Index.name, H5IterOrder.inc, &file_info);
     
     writefln("* Use iterator to see the names of the objects in the group Data_new");
-    H5L.iterate_by_name(grp, "/Data_new", H5Index.Name, H5IterOrder.Inc, &group_info, H5P_DEFAULT);
+    H5L.iterate_by_name(grp, "/Data_new", H5Index.name, H5IterOrder.inc, &group_info, H5P_DEFAULT);
     
     writefln("* Close the file");
     H5G.close(grp);
@@ -156,7 +157,7 @@ extern(C) static herr_t group_info(hid_t loc_id, const char *name, const H5LInfo
     pid = H5D.get_create_plist(did); /* get creation property list */
 
     //  Check if dataset is chunked.
-    if(H5DLayout.Chunked == H5P.get_layout(pid))
+    if(H5DLayout.H5D_CHUNKED == H5P.get_layout(pid))
     {
         // get chunking information: rank and dimensions.
         rank_chunk = H5P.get_chunk(pid, chunk_dims_out[]);
@@ -168,18 +169,35 @@ extern(C) static herr_t group_info(hid_t loc_id, const char *name, const H5LInfo
             writefln(" Invalid datatype.");
         }
         else {
-            if(t_class == H5TClass.Integer)
-                writefln(" Datatype is 'H5T_NATIVE_INTEGER'.");
-            if(t_class == H5TClass.Float)
-                writefln(" Datatype is 'H5T_NATIVE_FLOAT'");
-            if(t_class == H5TClass.String)
-                writefln(" Datatype is 'H5T_NATIVE_STRING'.");
-            if(t_class == H5TClass.Bitfield)
-                writefln(" Datatype is 'H5T_NATIVE_BITFIELD'.");
-            if(t_class == H5TClass.Opaque)
-                writefln(" Datatype is 'H5T_NATIVE_OPAQUE'.");
-            if(t_class == H5TClass.Compound)
-                writefln(" Datatype is 'H5T_NATIVE_COMPOUND'.");
+		switch(t_class)
+		{
+			case H5TClass.H5T_INTEGER:
+				writefln(" Datatype is 'H5T_NATIVE_INTEGER'.");
+				break;
+			
+			case H5TClass.H5T_FLOAT:
+				writefln(" Datatype is 'H5T_NATIVE_FLOAT'");
+				break;
+			
+			case H5TClass.H5T_STRING:
+				writefln(" Datatype is 'H5T_NATIVE_STRING'.");
+				break;
+
+			case H5TClass.H5T_BITFIELD:
+				writefln(" Datatype is 'H5T_NATIVE_BITFIELD'.");
+				break;
+
+			case H5TClass.H5T_OPAQUE:
+				writefln(" Datatype is 'H5T_NATIVE_OPAQUE'.");
+				break;
+
+			case H5TClass.H5T_COMPOUND:
+				writefln(" Datatype is 'H5T_NATIVE_COMPOUND'.");
+				break;
+
+			default:
+				break;
+		}
         }
     }
     H5D.close(did);

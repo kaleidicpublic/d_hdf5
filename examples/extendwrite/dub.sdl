@@ -1,5 +1,5 @@
-name "attribute"
-description "illustrates the usage of the H5A Interface functions: based on h5_attribute.c"
+name "extendwrite"
+description "illustrates the usage of the H5 extend write functions: based on h5_extendwrite.c"
 homepage "https://github.com/Laeeth/d_hdf5"
 authors "Laeeth Isharc,HDF5 Group"
 license "Boost-1.0"

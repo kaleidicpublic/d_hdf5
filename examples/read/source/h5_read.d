@@ -23,6 +23,7 @@
 
 
 import hdf5.hdf5;
+import hdf5.head;
 import std.stdio;
 import std.exception;
 
@@ -73,10 +74,10 @@ int main(string[] args)
     // Get datatype and dataspace handles and then query dataset class, order, size, rank and dimensions.
     datatype  = H5D.get_type(dataset);     /* datatype handle */
     t_class     = H5T.get_class(datatype);
-    if (t_class == H5TClass.Integer)
+    if (t_class == H5TClass.H5T_INTEGER)
         writefln("Data set has INTEGER type");
     order     = H5T.get_order(datatype);
-    if (order == H5TByteOrder.LE)
+    if (order == H5TByteOrder.H5T_ORDER_LE)
         writefln("Little endian order");
 
     size  = H5T.get_size(datatype);

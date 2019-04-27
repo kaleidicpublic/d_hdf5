@@ -21,6 +21,7 @@
 
 
 import hdf5.hdf5;
+import hdf5.head;
 
 import std.stdio;
 import std.exception;
@@ -69,7 +70,7 @@ int main(string[] args)
     writefln("* copying dataset");
     datatype = H5T.copy(H5T_NATIVE_INT);
     writefln("* byteorder = little-endian");
-    H5T.set_order(datatype, H5TByteOrder.LE);
+    H5T.set_order(datatype, H5TByteOrder.H5T_ORDER_LE);
 
     // Create a new dataset within the file using defined dataspace and datatype and default dataset creation properties.
     writefln("* new dataset within file called %s",DATASETNAME);

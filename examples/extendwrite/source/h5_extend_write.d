@@ -22,6 +22,7 @@
 
 
 import hdf5.hdf5;
+import hdf5.head;
 
 import std.stdio;
 import std.exception;
@@ -85,8 +86,8 @@ int main(string[] args)
     filespace = H5D.get_space(dataset); 
     offset[0] = 0;
     offset[1] = 0;
-    // H5S.select_hyperslab(filespace, H5SSeloper.Set, offset, cast(hsize_t[])[], dims1, cast(hsize_t[])[]);
-    H5S.select_hyperslab(filespace, H5SSeloper.Set, offset, dims1);
+    // H5S.select_hyperslab(filespace, H5SSelectOperation.set, offset, cast(hsize_t[])[], dims1, cast(hsize_t[])[]);
+    H5S.select_hyperslab(filespace, H5SSelectOperation.set, offset, dims1);
 
     writefln("* Write the data to the hyperslab.");
     H5D.write(dataset, H5T_NATIVE_INT, dataspace, filespace, H5P_DEFAULT, cast(ubyte*)data1);
@@ -102,7 +103,7 @@ int main(string[] args)
     filespace = H5D.get_space(dataset); 
     offset[0] = 3;
     offset[1] = 0;
-    H5S.select_hyperslab(filespace, H5SSeloper.Set, offset, dims2);
+    H5S.select_hyperslab(filespace, H5SSelectOperation.set, offset, dims2);
 
     writefln("* Define memory space");
     dataspace = H5S.create_simple(dims2); 
@@ -118,7 +119,7 @@ int main(string[] args)
     filespace = H5D.get_space(dataset);
     offset[0] = 0;
     offset[1] = 3;
-    H5S.select_hyperslab(filespace, H5SSeloper.Set, offset, dims3);
+    H5S.select_hyperslab(filespace, H5SSelectOperation.set, offset, dims3);
     writefln("* Define memory space");
     dataspace = H5S.create_simple(dims3);
 

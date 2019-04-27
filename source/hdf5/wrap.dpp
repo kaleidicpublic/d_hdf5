@@ -54,6 +54,7 @@ import std.stdio;
 //import hdf5.bindings.enums;
 //import hdf5.bindings.api;
 //import hdf5.wrap;
+//alias hid_t = int;
 
 #include <hdf5.h>
 #include <hdf5_hl.h>
@@ -69,6 +70,7 @@ alias H5OInfo = H5O_info_t;
 alias H5OType = H5O_type_t;
 alias H5RType = H5R_type_t;
 alias H5SClass = H5S_class_t;
+
 
 enum H5SSelectOperation: H5S_seloper_t
 {
@@ -1024,12 +1026,11 @@ struct H5P
     throwOnError(H5Pregister2(cls_id,toStringzConst(name),size,def_value,prp_create,prp_set,prp_get,prp_del,prp_copy,prp_cmp,prp_close));
   }
  
- 
++/ 
   void insert2(hid_t plist_id, string name, size_t size, void *value, H5PPropertySetFunction prp_set, H5P_prp_get_func_t prp_get, H5P_prp_delete_func_t prp_delete, H5P_prp_copy_func_t prp_copy, H5P_prp_compare_func_t prp_cmp, H5P_prp_close_func_t prp_close)
   {
     throwOnError(H5Pinsert2(plist_id,toStringzConst(name),size,value,prp_set,prp_get,prp_delete,prp_copy,prp_cmp,prp_close));
   }
-+/ 
  
   void set(hid_t plist_id, string name, string value)
   {
@@ -1869,9 +1870,9 @@ struct H5R
     {
       throwOnError(H5Rcreate(_ref, loc_id, toStringzConst(name),ref_type,space_id));
     }
-   hid_t dereference(hid_t dataset, H5RType ref_type, H5R_type_t _ref, void* buf)
+   hid_t dereference(hid_t dataset, H5R_type_t ref_type, void* buf) // H5R_type_t _ref, void* buf)
    {
-      return H5Rdereference(dataset, ref_type, _ref,buf);
+      return H5Rdereference1(dataset, ref_type, buf); // _ref,buf);
    }
    hid_t get_region(hid_t dataset, H5RType ref_type, const void *_ref)
    {
